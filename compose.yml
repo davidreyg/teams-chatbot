@@ -1,0 +1,15 @@
+services:
+  chatbot:
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm"
+    container_name: chatbot
+    volumes:
+      - .:/workspace
+    ports:
+      - "3978:3978"
+    network_mode: "host"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true
+    stdin_open: true
+    entrypoint: [ "/bin/zsh", "-l" ]
+    init: true
