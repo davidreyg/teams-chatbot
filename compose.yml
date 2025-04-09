@@ -5,7 +5,7 @@ services:
     volumes:
       - .:/workspace
     ports:
-      - "3978:3978"
+      - "4000:4000"
     network_mode: "host"
     extra_hosts:
       - "host.docker.internal:host-gateway"
