@@ -13,11 +13,15 @@ import { INodeSocket } from 'botframework-streaming';
 import {
   CloudAdapter,
   ConfigurationServiceClientCredentialFactory,
+  ConversationState,
   createBotFrameworkAuthenticationFromConfiguration,
+  MemoryStorage,
+  UserState,
 } from 'botbuilder';
 
 // This bot's main dialog.
-import { EchoBot } from './bot';
+import { DialogBot } from './bots/dialogBot';
+import { UserProfileDialog } from './dialogs/incidentDialog';
 
 // Create HTTP server.
 const server = restify.createServer();
@@ -65,9 +69,17 @@ const onTurnErrorHandler = async (context, error) => {
 // Set the onTurnError for the singleton CloudAdapter.
 adapter.onTurnError = onTurnErrorHandler;
 
-// Create the main dialog.
-const myBot = new EchoBot();
+// Define the state store for your bot.
+// See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
+// A bot requires a state storage system to persist the dialog and user state between messages.
+const memoryStorage = new MemoryStorage();
 
+// Create conversation state with in-memory storage provider.
+const conversationState = new ConversationState(memoryStorage);
+const userState = new UserState(memoryStorage);
+// Create the main dialog.
+const dialog = new UserProfileDialog(userState);
+const myBot = new DialogBot(conversationState, userState, dialog);
 // Listen for incoming requests.
 server.post('/api/messages', async (req, res) => {
   // Route received a request to adapter for processing
