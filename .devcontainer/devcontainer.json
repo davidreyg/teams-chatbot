@@ -24,7 +24,9 @@
 				"vivaxy.vscode-conventional-commits",
 				"ms-azuretools.vscode-docker",
 				"docker.docker",
-				"Nuxt.mdc"
+				"Nuxt.mdc",
+				"christian-kohler.npm-intellisense",
+				"esbenp.prettier-vscode"
 			]
 		}
 	}
