@@ -22,6 +22,7 @@
     "botbuilder": "^4.23.2",
     "botbuilder-dialogs": "^4.23.2",
     "dotenv": "~8.2.0",
+    "ofetch": "^1.4.1",
     "replace": "~1.2.2",
     "restify": "~11.1.0"
   },
